@@ -7,14 +7,12 @@
   .long FLAGS
   .long CHECKSUM
 
-
-
 .section .text
-.extrn kernalMain
+.extern kernalMain
 .global loader
 
 loader:
-    mov &kernal_stack ,%esp
+    mov kernal_stack, %esp
     call kernalMain
     push %eax
     push %ebx
@@ -24,8 +22,6 @@ _stop:
     hlt
     jmp _stop
 
-
-
 .section .bss
-.space 2*1024*1024 # 2 MB for kernel stack
+.space 2 * 1024 * 1024
 kernal_stack:
